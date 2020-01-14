@@ -33,6 +33,10 @@
         "src/app/models/*.ts",
         "src/app/models/entities/*.ts",
         "src/app/models/responses/*.ts",
+      ],
+      "@directives/*": [
+        "src/app/directives/*.directive.ts",
+        "src/app/directives/*.ts" // for autoimport in IDE
       ]
     }
   }
