@@ -1,0 +1,18 @@
+<div class="input-group search-panel">
+  <input
+    type="text"
+    ngxDaterangepickerMd
+    [locale]="{ applyLabel: 'Find mails', format: 'YYYY/M/D' }"
+    [(ngModel)]="selectedMomentRange"
+    placeholder="Select date range"
+    (change)="onDateRangeChange()"
+    class="form-control"
+  />
+  <div class="input-group-append search-panel-commands">
+    <button
+      type="button"
+      class="input-group-text btn btn-default search-panel-find-button"
+      (click)="onSearchClick()"
+    ></button>
+  </div>
+</div>

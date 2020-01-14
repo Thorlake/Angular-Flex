@@ -1,0 +1,19 @@
+{
+  "version": "0.1.0",
+  "configurations": [
+    {
+      "name": "Launch Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:4209/#",
+      "webRoot": "${workspaceRoot}"
+    },
+    {
+      "name": "Attach Chrome",
+      "type": "chrome",
+      "request": "attach",
+      "urlFilter": "http://localhost:4209/*",
+      "webRoot": "${workspaceRoot}"
+    }
+  ]
+}
