@@ -11,13 +11,15 @@ import { HomeComponent } from './pages/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchPanelComponent } from './components/search-panel/search-panel.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { MailsTableComponent } from './components/mails/mails-table/mails-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
     HomeComponent,
-    SearchPanelComponent
+    SearchPanelComponent,
+    MailsTableComponent
   ],
   imports: [
     BrowserModule,

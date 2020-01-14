@@ -1,0 +1,35 @@
+<table class="table table-hover">
+  <caption>Results: <span [innerHTML]="this.mails.length"></span> mails(s)</caption>
+  <thead class="thead-light">
+    <tr>
+      <th
+        scope="col"
+        sortable="from"
+        (sort)="onSort($event)"
+      >From</th>
+      <th
+        scope="col"
+        sortable="to"
+        (sort)="onSort($event)"
+      >To</th>
+      <th
+        scope="col"
+        sortable="subject"
+        (sort)="onSort($event)"
+      >Subject</th>
+      <th
+        scope="col"
+        sortable="date"
+        (sort)="onSort($event)"
+      >Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let mail of this.mails">
+      <td> {{ mail.from }} </td>
+      <td> {{ mail.to }} </td>
+      <td> {{ mail.subject }} </td>
+      <td> {{ mail.date }} </td>
+    </tr>
+  </tbody>
+</table>
