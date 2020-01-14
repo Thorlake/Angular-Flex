@@ -1,4 +1,4 @@
-import { MomentRange } from '@models/interfaces/MomentRange';
+import { MomentRange } from '@models/moment-range';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
