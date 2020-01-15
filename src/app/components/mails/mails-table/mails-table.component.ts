@@ -24,7 +24,6 @@ export class MailsTableComponent implements OnInit {
   }
 
   onSort({ column, direction }: SortEvent) {
-    debugger;
     // resetting other headers
     this.headers.forEach(header => {
       if (header.sortable !== column) {
@@ -34,6 +33,7 @@ export class MailsTableComponent implements OnInit {
 
     if (direction === '') {
       column = 'id';
+      direction = 'asc';
     }
 
     this.mails = this.mails.sort((mail1, mail2) => {
