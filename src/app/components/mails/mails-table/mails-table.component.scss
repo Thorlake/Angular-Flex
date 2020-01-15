@@ -1,3 +1,9 @@
+caption {
+  color: #666666;
+  font-weight: bold;
+  caption-side: top;
+}
+
 @mixin sort-direction-icon {
   content: "";
   display: inline-block;
@@ -9,23 +15,47 @@
   background-repeat: no-repeat;
 }
 
-caption {
-  caption-side: top;
-}
+table.mail {
+  th {
+    color: #666666;
+    font-weight: 500;
+    background-color: #f5f5f5;
 
-th[sortable] {
-  cursor: pointer;
-}
+    &[sortable] {
+      cursor: pointer;
 
-th[sortable].asc {
-  &:after {
-    @include sort-direction-icon();
+      &.asc {
+        &:after {
+          @include sort-direction-icon();
+        }
+      }
+
+      &.desc {
+        &:after {
+          @include sort-direction-icon();
+          transform: rotate(180deg);
+        }
+      }
+    }
   }
-}
 
-th[sortable].desc {
-  &:after {
-    @include sort-direction-icon();
-    transform: rotate(180deg);
+  td {
+    max-width: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .badge-secondary {
+    background-color: #888888;
+  }
+
+  .clip {
+    width: 18px;
+    height: 18px;
+    display: block;
+    float: left;
+    background-image: url("/assets/images/icon_clip.svg");
+    background-repeat: no-repeat;
   }
 }

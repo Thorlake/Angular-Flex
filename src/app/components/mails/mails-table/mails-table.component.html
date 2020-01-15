@@ -1,24 +1,26 @@
-<table class="table table-hover">
+<table class="table table-hover mail">
   <caption>Results: <span [innerHTML]="this.mails.length"></span> mails(s)</caption>
   <thead class="thead-light">
     <tr>
       <th
-        scope="col"
+        style="width: 15%"
         sortable="from"
         (sort)="onSort($event)"
       >From</th>
       <th
-        scope="col"
+        style="width: 20%"
         sortable="to"
         (sort)="onSort($event)"
       >To</th>
+      <th style="width: 5%"></th>
       <th
-        scope="col"
+        style="width: 40%"
         sortable="subject"
         (sort)="onSort($event)"
       >Subject</th>
+      <th style="width: 5%"></th>
       <th
-        scope="col"
+        style="width: 15%"
         sortable="date"
         (sort)="onSort($event)"
       >Date</th>
@@ -26,10 +28,23 @@
   </thead>
   <tbody>
     <tr *ngFor="let mail of this.mails">
-      <td> {{ mail.from }} </td>
-      <td> {{ mail.to }} </td>
-      <td> {{ mail.subject }} </td>
-      <td> {{ mail.date }} </td>
+      <td>{{ mail.from }}</td>
+      <td>{{ mail.to.join(", ") }}</td>
+      <td>
+        <span
+          *ngIf="mail.to.length > 1"
+          class="badge badge-secondary"
+        >{{ "+" + (mail.to.length - 1) }}
+        </span>
+      </td>
+      <td>{{ mail.subject }}</td>
+      <td>
+        <span
+          *ngIf="mail.attachment.length > 0"
+          class="clip"
+        ></span>
+      </td>
+      <td>{{ mail.date | date }}</td>
     </tr>
   </tbody>
 </table>
