@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchPanelComponent } from './components/search-panel/search-panel.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { MailsTableComponent } from './components/mails/mails-table/mails-table.component';
+import { SortableThDirective } from '@directives/sortable-th.directive';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MailsTableComponent } from './components/mails/mails-table/mails-table.
     NotFoundComponent,
     HomeComponent,
     SearchPanelComponent,
-    MailsTableComponent
+    MailsTableComponent,
+    SortableThDirective
   ],
   imports: [
     BrowserModule,
