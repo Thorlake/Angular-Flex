@@ -1,3 +1,31 @@
+@mixin sort-direction-icon {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 8px;
+  position: relative;
+  left: 6px;
+  background-image: url("/assets/images/icon_arrow01.svg");
+  background-repeat: no-repeat;
+}
+
 caption {
   caption-side: top;
+}
+
+th[sortable] {
+  cursor: pointer;
+}
+
+th[sortable].asc {
+  &:after {
+    @include sort-direction-icon();
+  }
+}
+
+th[sortable].desc {
+  &:after {
+    @include sort-direction-icon();
+    transform: rotate(180deg);
+  }
 }
