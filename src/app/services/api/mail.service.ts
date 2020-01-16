@@ -1,3 +1,4 @@
+import { MomentRange } from '@models/moment-range';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Mail } from '@models/mail';
@@ -6,7 +7,15 @@ import { Mail } from '@models/mail';
 export class MailService {
   constructor(private http: HttpClient) { }
 
-  getAll(): Mail[] {
+  getAll(dateRange: MomentRange): Mail[] {
+    let mails = this.GetAll();
+    if (dateRange && dateRange.startDate && dateRange.endDate) {
+      mails = mails.filter(mail => dateRange.startDate.isSameOrBefore(mail.date) && dateRange.endDate.isSameOrAfter(mail.date));
+    }
+    return mails;
+  }
+
+  private GetAll(): Mail[] {
     return [
       {
         id: 1,

@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
 export interface MomentRange {
-  start: Moment;
-  end: Moment;
+  startDate: Moment;
+  endDate: Moment;
 }
