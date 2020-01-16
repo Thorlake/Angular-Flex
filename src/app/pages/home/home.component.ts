@@ -8,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  dateRange: MomentRange;
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  onSearchSubmit(momentRange: MomentRange) {
+  onSearchSubmit(dateRange: MomentRange) {
+    this.dateRange = dateRange;
   }
 }

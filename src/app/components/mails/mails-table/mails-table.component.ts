@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
 import { Mail } from '@models/mail';
 import { SortableThDirective, SortEvent } from '@directives/sortable-th.directive';
 import { MailService } from '@api/mail.service';
+import { MomentRange } from '@models/moment-range';
 
 @Component({
   selector: 'app-mails-table',
@@ -9,6 +10,17 @@ import { MailService } from '@api/mail.service';
   styleUrls: ['./mails-table.component.scss']
 })
 export class MailsTableComponent implements OnInit {
+
+  private _dateRange: MomentRange;
+
+  @Input() set dateRange(value: MomentRange) {
+    this._dateRange = value;
+    this.load();
+  }
+
+  get dateRange(): MomentRange {
+    return this._dateRange;
+  }
 
   mails: Mail[];
   @ViewChildren(SortableThDirective) headers: QueryList<SortableThDirective>;
@@ -20,7 +32,7 @@ export class MailsTableComponent implements OnInit {
   }
 
   load() {
-    this.mails = this.mailService.getAll();
+    this.mails = this.mailService.getAll(this.dateRange);
   }
 
   onSort({ column, direction }: SortEvent) {

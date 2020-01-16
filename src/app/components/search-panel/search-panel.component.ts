@@ -7,7 +7,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./search-panel.component.scss']
 })
 export class SearchPanelComponent implements OnInit {
-  selectedMomentRange: MomentRange;
+  selectedDateRange: MomentRange;
   @Output() searchSubmit = new EventEmitter<MomentRange>();
 
   constructor() { }
@@ -15,7 +15,7 @@ export class SearchPanelComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDateRangeChange() {
+  onDateRangeChange(event: any) {
     this.emitSubmitSearch();
   }
 
@@ -24,6 +24,6 @@ export class SearchPanelComponent implements OnInit {
   }
 
   private emitSubmitSearch() {
-    this.searchSubmit.emit(this.selectedMomentRange);
+    this.searchSubmit.emit(this.selectedDateRange);
   }
 }

@@ -3,9 +3,10 @@
     type="text"
     ngxDaterangepickerMd
     [locale]="{ applyLabel: 'Find mails', format: 'YYYY/M/D' }"
-    [(ngModel)]="selectedMomentRange"
+    [(ngModel)]="selectedDateRange"
     placeholder="Select date range"
-    (change)="onDateRangeChange()"
+    (change)="onDateRangeChange($event)"
+    [showClearButton]="true"
     class="form-control"
   />
   <div class="input-group-append search-panel-commands">

@@ -1,12 +1,12 @@
-<div class="container mt-5">
+<div class="container mt-5 h-100">
   <div class="row">
     <div class="col-md-auto">
       <app-search-panel (searchSubmit)="onSearchSubmit($event)"></app-search-panel>
     </div>
   </div>
-  <div class="row">
+  <div class="row h-100">
     <div class="col-12">
-      <app-mails-table></app-mails-table>
+      <app-mails-table [dateRange]="dateRange"></app-mails-table>
     </div>
   </div>
 </div>
