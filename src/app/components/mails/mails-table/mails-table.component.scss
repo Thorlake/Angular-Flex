@@ -1,7 +1,8 @@
 caption {
   color: #666666;
-  font-weight: bold;
+  font-weight: 500;
   caption-side: top;
+  border-bottom: 2px solid #ebebeb;
 }
 
 @mixin sort-direction-icon {
