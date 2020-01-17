@@ -22,7 +22,7 @@ export class MailService {
         from: 'aaa@example.com',
         to: ['zzz.zzz@example.com'],
         subject: '[ HR-888 ] Notice of official announcement',
-        date: new Date(2019, 1, 1),
+        date: new Date().withoutTime().addMinutes(20),
         attachment: ''
       },
       {
@@ -30,7 +30,7 @@ export class MailService {
         from: 'bbb.bbbb@example.com',
         to: ['yyy@example.com'],
         subject: '[web:333] "Web Contact"',
-        date: new Date(2019, 1, 2),
+        date: new Date().withoutTime().addMinutes(10),
         attachment: ''
       },
       {
@@ -38,7 +38,7 @@ export class MailService {
         from: 'ccc@example.com',
         to: ['xxx@example.com', 'ddd@example.com'],
         subject: 'Happy New Year! Greetings for the New Year.',
-        date: new Date(2019, 1, 3),
+        date: new Date().withoutTime(),
         attachment: 'base64'
       },
       {
@@ -46,7 +46,7 @@ export class MailService {
         from: 'ddd.dddd@example.com',
         to: ['vvv.vvv@example.com', 'qqq.qqqq@example.com'],
         subject: '[HR-887(Revised: Office Expansion Project Team)] Notice of office',
-        date: new Date(2019, 1, 1),
+        date: new Date(2020, 0, 1),
         attachment: ''
       },
       {
@@ -54,7 +54,7 @@ export class MailService {
         from: 'eee@example.com',
         to: ['sss@example.com', 'ooo@example.com', 'ppp@example.com'],
         subject: '[Github] Logout page',
-        date: new Date(2020, 1, 1),
+        date: new Date(2020, 0, 1),
         attachment: ''
       },
       {
@@ -62,7 +62,7 @@ export class MailService {
         from: 'fff.ffff@example.com',
         to: ['qqq.qqq@example.com'],
         subject: '[dev] Postfix 3.1.12 /3.2.9/3.3.4/3.4.5',
-        date: new Date(2020, 1, 1),
+        date: new Date(2020, 0, 1),
         attachment: ''
       },
       {
@@ -70,7 +70,7 @@ export class MailService {
         from: 'ggg@example.com',
         to: ['ppp@example.com'],
         subject: 'Re: [Github] Brush-up on loading animation',
-        date: new Date(2020, 1, 1),
+        date: new Date(2020, 0, 1),
         attachment: ''
       },
       {
@@ -78,7 +78,7 @@ export class MailService {
         from: 'hhh.hhh@example.com',
         to: ['ooo.ooo@example.com'],
         subject: 'Workplace Summary for sample, Inc.: Jun 2 - Jun 9',
-        date: new Date(2020, 1, 1),
+        date: new Date(2020, 0, 1),
         attachment: 'base64'
       },
       {
@@ -86,7 +86,7 @@ export class MailService {
         from: 'iii@example.com',
         to: ['nnn@example.com'],
         subject: 'I love you',
-        date: new Date(2019, 12, 31),
+        date: new Date(2019, 11, 31),
         attachment: 'base64'
       },
       {
@@ -96,7 +96,7 @@ export class MailService {
         // tslint:disable-next-line: max-line-length
         to: ['Pablo Diego José Francisco de Paula Juan Nepomuceno María de los Remedios Cipriano de la Santísima Trinidad Ruiz y Picasso@example.com'],
         subject: '[info:888] ABC EQUIPMENT COMPANY',
-        date: new Date(2019, 12, 31),
+        date: new Date(2019, 11, 31),
         attachment: ''
       }
     ];

@@ -19,7 +19,7 @@
     ],
     "paths": {
       "@extensions/*": [
-        "src/extensions/*.extensions.ts"
+        "src/app/extensions/*.extensions.ts"
       ],
       "@api/*": [
         "src/app/services/api/*.service.ts",
