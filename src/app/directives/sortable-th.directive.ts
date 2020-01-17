@@ -2,7 +2,6 @@
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 
 export type SortDirection = 'asc' | 'desc' | '';
-const rotate: { [key: string]: SortDirection } = { 'asc': 'desc', 'desc': '', '': 'asc' };
 
 export interface SortEvent {
   column: string;
@@ -19,12 +18,18 @@ export interface SortEvent {
 })
 export class SortableThDirective {
 
+  private directionTransition: { [key: string]: SortDirection } = {
+    'asc': 'desc',
+    'desc': '',
+    '': 'asc'
+  };
+
   @Input() sortable: string;
   @Input() direction: SortDirection = '';
   @Output() sort = new EventEmitter<SortEvent>();
 
   rotate() {
-    this.direction = rotate[this.direction];
+    this.direction = this.directionTransition[this.direction];
     this.sort.emit({ column: this.sortable, direction: this.direction });
   }
 }
