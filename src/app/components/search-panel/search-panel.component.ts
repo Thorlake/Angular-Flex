@@ -15,7 +15,11 @@ export class SearchPanelComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDateRangeChange(event: any) {
+  onDateRangeChange(value: any) {
+    // remove when ngxDaterangepickerMd gets normal API for clearing datepicker
+    if (value instanceof Event) {
+      this.selectedDateRange = undefined;
+    }
     this.emitSubmitSearch();
   }
 
