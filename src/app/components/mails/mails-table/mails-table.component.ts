@@ -32,7 +32,6 @@ export class MailsTableComponent implements OnInit {
   constructor(private mailService: MailService) { }
 
   ngOnInit() {
-    this.load();
   }
 
   public onSort({ column, direction }: SortEvent) {
