@@ -13,6 +13,7 @@ import { SearchPanelComponent } from './components/search-panel/search-panel.com
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { MailsTableComponent } from './components/mails/mails-table/mails-table.component';
 import { SortableThDirective } from '@directives/sortable-th.directive';
+import { DateTimeFormatPipe } from './pipes/date-time-format.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SortableThDirective } from '@directives/sortable-th.directive';
     HomeComponent,
     SearchPanelComponent,
     MailsTableComponent,
+    DateTimeFormatPipe,
     SortableThDirective
   ],
   imports: [
@@ -34,7 +36,9 @@ import { SortableThDirective } from '@directives/sortable-th.directive';
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    DateTimeFormatPipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
