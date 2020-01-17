@@ -13,8 +13,13 @@ export class MailsTableComponent implements OnInit {
 
   private _dateRange: MomentRange;
 
-  @Input() set dateRange(value: MomentRange) {
+  @ViewChildren(SortableThDirective)
+  private headers: QueryList<SortableThDirective>;
+
+  @Input()
+  set dateRange(value: MomentRange) {
     this._dateRange = value;
+    this.resetSortHeaders();
     this.load();
   }
 
@@ -22,8 +27,7 @@ export class MailsTableComponent implements OnInit {
     return this._dateRange;
   }
 
-  mails: Mail[];
-  @ViewChildren(SortableThDirective) headers: QueryList<SortableThDirective>;
+  public mails: Mail[];
 
   constructor(private mailService: MailService) { }
 
@@ -31,17 +35,8 @@ export class MailsTableComponent implements OnInit {
     this.load();
   }
 
-  load() {
-    this.mails = this.mailService.getAll(this.dateRange);
-  }
-
-  onSort({ column, direction }: SortEvent) {
-    // resetting other headers
-    this.headers.forEach(header => {
-      if (header.sortable !== column) {
-        header.direction = '';
-      }
-    });
+  public onSort({ column, direction }: SortEvent) {
+    this.resetSortHeaders(column);
 
     if (direction === '') {
       column = 'id';
@@ -54,5 +49,19 @@ export class MailsTableComponent implements OnInit {
       const res = val1 < val2 ? -1 : val1 > val2 ? 1 : 0;
       return direction === 'asc' ? res : -res;
     });
+  }
+
+  private load() {
+    this.mails = this.mailService.getAll(this.dateRange);
+  }
+
+  private resetSortHeaders(keepColumnSorted?: string) {
+    if (this.headers) {
+      this.headers.forEach(header => {
+        if (!keepColumnSorted || header.sortable !== keepColumnSorted) {
+          header.direction = '';
+        }
+      });
+    }
   }
 }
