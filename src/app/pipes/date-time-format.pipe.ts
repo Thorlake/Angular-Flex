@@ -8,7 +8,7 @@ export class DateTimeFormatPipe extends DatePipe implements PipeTransform {
     const curDate = new Date();
     if (curDate.isSameDate(value)) {
       format = 'H:mm';
-    } else if (curDate.isSameMonth(value)) {
+    } else if (curDate.isSameMonth(value) || curDate.isSameYear(value)) {
       format = 'MMM dd';
     }
     return super.transform(value, format);

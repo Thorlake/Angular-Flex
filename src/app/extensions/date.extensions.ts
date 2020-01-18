@@ -7,6 +7,7 @@ interface Date {
   addDays(days: number): Date;
 
   isToday(): boolean;
+  isSameYear(date: Date): boolean;
   isSameMonth(date: Date): boolean;
   isSameDate(date: Date): boolean;
 }
@@ -59,6 +60,10 @@ Date.prototype.addDays = function (days: number): Date {
 Date.prototype.isToday = function (): boolean {
   const today = new Date();
   return this.isSameDate(today);
+};
+
+Date.prototype.isSameYear = function (date: Date): boolean {
+  return date && this.getFullYear() === date.getFullYear();
 };
 
 Date.prototype.isSameMonth = function (date: Date): boolean {
