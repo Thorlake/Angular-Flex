@@ -39,7 +39,7 @@ export class MailService {
         to: ['xxx@example.com', 'ddd@example.com'],
         subject: 'Happy New Year! Greetings for the New Year.',
         date: new Date().withoutTime().addSeconds(1),
-        attachment: 'base64'
+        attachment: '/assets/images/attachment1.jpg'
       },
       {
         id: 4,
@@ -79,7 +79,7 @@ export class MailService {
         to: ['ooo.ooo@example.com'],
         subject: 'Workplace Summary for sample, Inc.: Jun 2 - Jun 9',
         date: new Date(2020, 0, 1, 1),
-        attachment: 'base64'
+        attachment: '/assets/images/attachment2.jpg'
       },
       {
         id: 9,
@@ -87,7 +87,7 @@ export class MailService {
         to: ['nnn@example.com'],
         subject: 'I love you',
         date: new Date(2019, 11, 31, 1),
-        attachment: 'base64'
+        attachment: '/assets/images/attachment3.jpg'
       },
       {
         id: 10,
