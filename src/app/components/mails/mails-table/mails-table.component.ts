@@ -104,6 +104,9 @@ export class MailsTableComponent implements OnInit {
     } else if (aType === '[object Date]') {
       // Date sorting has to be inverted to read better
       revertSort = -1;
+    } else if (aType === '[object Array]') {
+      a = a[0].toUpperCase();
+      b = b[0].toUpperCase();
     }
 
     let res = 0;
