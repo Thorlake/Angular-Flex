@@ -11,10 +11,11 @@ import { MomentRange } from '@models/moment-range';
 })
 export class MailsTableComponent implements OnInit {
 
+  private _sortedColumn: string;
   private _dateRange: MomentRange;
 
   @ViewChildren(SortableThDirective)
-  private headers: QueryList<SortableThDirective>;
+  private _headers: QueryList<SortableThDirective>;
 
   @Input()
   set dateRange(value: MomentRange) {
@@ -35,12 +36,12 @@ export class MailsTableComponent implements OnInit {
   }
 
   public onSort({ column, direction }: SortEvent) {
-    this.resetSortHeaders(column);
-
     if (direction === '') {
       column = 'id';
       direction = 'asc';
     }
+
+    this.resetSortHeaders(column);
 
     this.mails = this.mails.sort((mail1, mail2) => {
       const val1 = mail1[column];
@@ -50,13 +51,21 @@ export class MailsTableComponent implements OnInit {
     });
   }
 
+  public tdClasses(column: string) {
+    const classes = {
+      'font-weight-bold': this._sortedColumn === column,
+    };
+    return classes;
+  }
+
   private load() {
     this.mails = this.mailService.getAll(this.dateRange);
   }
 
   private resetSortHeaders(keepColumnSorted?: string) {
-    if (this.headers) {
-      this.headers.forEach(header => {
+    this._sortedColumn = keepColumnSorted;
+    if (this._headers) {
+      this._headers.forEach(header => {
         if (!keepColumnSorted || header.sortable !== keepColumnSorted) {
           header.direction = '';
         }

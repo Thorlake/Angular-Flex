@@ -33,8 +33,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let mail of this.mails">
-          <td>{{ mail.from }}</td>
-          <td>{{ mail.to.join(", ") }}</td>
+          <td [ngClass]="tdClasses('from')">{{ mail.from }}</td>
+          <td [ngClass]="tdClasses('to')">{{ mail.to.join(", ") }}</td>
           <td>
             <span
               *ngIf="mail.to.length > 1"
@@ -42,14 +42,14 @@
             >{{ "+" + (mail.to.length - 1) }}
             </span>
           </td>
-          <td>{{ mail.subject }}</td>
+          <td [ngClass]="tdClasses('subject')">{{ mail.subject }}</td>
           <td>
             <span
               *ngIf="mail.attachment.length > 0"
               class="clip"
             ></span>
           </td>
-          <td>{{ mail.date | dateTimeFormat }}</td>
+          <td [ngClass]="tdClasses('date')">{{ mail.date | dateTimeFormat }}</td>
         </tr>
       </tbody>
     </table>
