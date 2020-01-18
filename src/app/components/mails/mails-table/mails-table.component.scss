@@ -47,6 +47,11 @@ table.mail {
   tr {
     cursor: pointer;
 
+    &:hover {
+      color: #0033dd !important;
+      background-color: #fafafa !important;
+    }
+
     td {
       max-width: 0;
       text-overflow: ellipsis;
