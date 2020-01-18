@@ -44,7 +44,7 @@ table.mail {
     }
   }
 
-  tr {
+  tr.clickable {
     cursor: pointer;
 
     &:hover {

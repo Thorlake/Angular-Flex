@@ -33,7 +33,10 @@
       </thead>
       <tbody>
         <ng-container *ngFor="let mail of this.mails">
-          <tr (click)="toogleCollapseRow(mail.id)">
+          <tr
+            class="clickable"
+            (click)="toogleCollapseRow(mail.id)"
+          >
             <td [ngClass]="tdClasses('from')">{{ mail.from }}</td>
             <td [ngClass]="tdClasses('to')">{{ mail.to.join(", ") }}</td>
             <td>
