@@ -45,7 +45,7 @@ export class MailsTableComponent implements OnInit {
     this.mails = this.mails.sort((mail1, mail2) => {
       const val1 = mail1[column];
       const val2 = mail2[column];
-      const res = val1 < val2 ? -1 : val1 > val2 ? 1 : 0;
+      const res = this.compare(val1, val2);
       return direction === 'asc' ? res : -res;
     });
   }
@@ -62,5 +62,35 @@ export class MailsTableComponent implements OnInit {
         }
       });
     }
+  }
+
+  private compare(first, second) {
+    let a = first;
+    let b = second;
+
+    const aType = Object.prototype.toString.call(a);
+    const bType = Object.prototype.toString.call(b);
+
+    if (aType !== bType) {
+      return 0;
+    }
+
+    let revertSort = 1;
+    if (aType === '[object String]') {
+      a = a.toUpperCase();
+      b = b.toUpperCase();
+    } else if (aType === '[object Date]') {
+      // Date sorting has to be inverted to read better
+      revertSort = -1;
+    }
+
+    let res = 0;
+    if (a > b) {
+      res = 1;
+    } else if (a < b) {
+      res = -1;
+    }
+
+    return res * revertSort;
   }
 }
