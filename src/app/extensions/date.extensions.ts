@@ -1,6 +1,7 @@
 interface Date {
   withoutTime(): Date;
 
+  addSeconds(seconds: number): Date;
   addMinutes(minutes: number): Date;
   addHours(hours: number): Date;
   addDays(days: number): Date;
@@ -13,6 +14,16 @@ interface Date {
 Date.prototype.withoutTime = function (): Date {
   const date: Date = this;
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+};
+
+Date.prototype.addSeconds = function (seconds: number): Date {
+  if (!seconds) {
+    return this;
+  }
+
+  const date: Date = this;
+  date.setSeconds(date.getSeconds() + seconds);
+  return date;
 };
 
 Date.prototype.addMinutes = function (minutes: number): Date {
