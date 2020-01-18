@@ -11,8 +11,9 @@ import { MomentRange } from '@models/moment-range';
 })
 export class MailsTableComponent implements OnInit {
 
-  private _sortedColumn: string;
   private _dateRange: MomentRange;
+  private _sortedColumn: string;
+  private _collapsedRows: { [id: number]: boolean } = {};
 
   @ViewChildren(SortableThDirective)
   private _headers: QueryList<SortableThDirective>;
@@ -20,6 +21,7 @@ export class MailsTableComponent implements OnInit {
   @Input()
   set dateRange(value: MomentRange) {
     this._dateRange = value;
+    this._collapsedRows = {};
     this.resetSortHeaders();
     this.load();
   }
@@ -56,6 +58,17 @@ export class MailsTableComponent implements OnInit {
       'font-weight-bold': this._sortedColumn === column,
     };
     return classes;
+  }
+
+  public toogleCollapseRow(column: number) {
+    this._collapsedRows[column] = !this._collapsedRows[column];
+  }
+
+  public isRowCollapsed(column) {
+    if (this._collapsedRows[column] === undefined) {
+      this._collapsedRows[column] = true;
+    }
+    return this._collapsedRows[column];
   }
 
   private load() {

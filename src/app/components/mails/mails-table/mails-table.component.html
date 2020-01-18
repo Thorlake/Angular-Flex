@@ -32,25 +32,42 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let mail of this.mails">
-          <td [ngClass]="tdClasses('from')">{{ mail.from }}</td>
-          <td [ngClass]="tdClasses('to')">{{ mail.to.join(", ") }}</td>
-          <td>
-            <span
-              *ngIf="mail.to.length > 1"
-              class="badge badge-secondary"
-            >{{ "+" + (mail.to.length - 1) }}
-            </span>
-          </td>
-          <td [ngClass]="tdClasses('subject')">{{ mail.subject }}</td>
-          <td>
-            <span
-              *ngIf="mail.attachment.length > 0"
-              class="clip"
-            ></span>
-          </td>
-          <td [ngClass]="tdClasses('date')">{{ mail.date | dateTimeFormat }}</td>
-        </tr>
+        <ng-container *ngFor="let mail of this.mails">
+          <tr (click)="toogleCollapseRow(mail.id)">
+            <td [ngClass]="tdClasses('from')">{{ mail.from }}</td>
+            <td [ngClass]="tdClasses('to')">{{ mail.to.join(", ") }}</td>
+            <td>
+              <span
+                *ngIf="mail.to.length > 1"
+                class="badge badge-secondary"
+              >{{ "+" + (mail.to.length - 1) }}
+              </span>
+            </td>
+            <td [ngClass]="tdClasses('subject')">{{ mail.subject }}</td>
+            <td>
+              <span
+                *ngIf="mail.attachment.length > 0"
+                class="clip"
+              ></span>
+            </td>
+            <td [ngClass]="tdClasses('date')">{{ mail.date | dateTimeFormat }}</td>
+          </tr>
+          <tr [ngbCollapse]="isRowCollapsed(mail.id)">
+            <td></td>
+            <td colspan="5">
+              <div>{{mail.subject}}</div>
+              <div>
+                <img
+                  *ngIf="mail.attachment.length > 0"
+                  width="256"
+                  height="256"
+                  alt="no_img"
+                  [src]="mail.attachment"
+                />
+              </div>
+            </td>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
 

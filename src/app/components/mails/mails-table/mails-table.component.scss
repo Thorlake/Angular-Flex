@@ -44,11 +44,15 @@ table.mail {
     }
   }
 
-  td {
-    max-width: 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+  tr {
+    cursor: pointer;
+
+    td {
+      max-width: 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
   }
 
   .badge-secondary {
@@ -61,6 +65,16 @@ table.mail {
     display: block;
     float: left;
     background-image: url("/assets/images/icon_clip.svg");
+    background-repeat: no-repeat;
+  }
+
+  .collapsed-arrow {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    position: relative;
+    background-image: url("/assets/images/icon_arrow02.svg");
     background-repeat: no-repeat;
   }
 }
