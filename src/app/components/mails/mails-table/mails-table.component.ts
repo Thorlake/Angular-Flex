@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList, Input, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Input, ElementRef, AfterViewInit, SimpleChange, OnChanges } from '@angular/core';
 import { Mail } from '@models/mail';
 import { SortableThDirective, SortEvent } from '@directives/sortable-th.directive';
 import { MailService } from '@api/mail.service';
@@ -9,37 +9,17 @@ import { MomentRange } from '@models/moment-range';
   templateUrl: './mails-table.component.html',
   styleUrls: ['./mails-table.component.scss']
 })
-export class MailsTableComponent implements OnInit, AfterViewInit {
+export class MailsTableComponent implements OnInit, AfterViewInit, OnChanges {
 
-  private _dateRange: MomentRange;
   private _sortedColumn: string;
   private _collapsedRows: { [id: number]: boolean } = {};
   private _toColumnsInitialData: { [id: number]: { html: string, width: number }[] } = {};
+  @ViewChildren(SortableThDirective) private _headers: QueryList<SortableThDirective>;
+  @ViewChildren('to_column_overflow') private _toColumnCells: QueryList<ElementRef>;
 
-  @ViewChildren(SortableThDirective)
-  private _headers: QueryList<SortableThDirective>;
-
-  @Input()
-  set dateRange(value: MomentRange) {
-    this._dateRange = value;
-    this._collapsedRows = {};
-    this.resetSortHeaders();
-    this.load();
-    setTimeout(() => {
-      this.saveInitialToColumnData();
-      this.truncateToColumnData();
-    });
-  }
-
-  get dateRange(): MomentRange {
-    return this._dateRange;
-  }
-
-  public mails: Mail[];
-  hiddenMailsNumberInToColumn: { [id: number]: number } = {};
-
-  @ViewChildren('to_column_overflow')
-  toColumnCells: QueryList<ElementRef>;
+  @Input() public dateRange: MomentRange;
+  public mails: Mail[] = [];
+  public hiddenMailsNumberInToColumn: { [id: number]: number } = {};
 
   constructor(private mailService: MailService) { }
 
@@ -53,6 +33,16 @@ export class MailsTableComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.truncateToColumnData();
     });
+  }
+
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    const dateRangeChange = changes['dateRange'];
+    if (dateRangeChange) {
+      this.dateRange = dateRangeChange.currentValue;
+      this._collapsedRows = {};
+      this.resetSortHeaders();
+      this.load();
+    }
   }
 
   public onSort({ column, direction }: SortEvent) {
@@ -90,7 +80,7 @@ export class MailsTableComponent implements OnInit, AfterViewInit {
   }
 
   public onResize() {
-    if (!this.toColumnCells) {
+    if (!this._toColumnCells) {
       return;
     }
 
@@ -151,12 +141,7 @@ export class MailsTableComponent implements OnInit, AfterViewInit {
   // There has to be a better way not to save initial data and just hide spans
   // Right now they get removed from html
   private saveInitialToColumnData() {
-    if (!this.toColumnCells) {
-      return;
-    }
-
-    this._toColumnsInitialData = {};
-    this.toColumnCells.forEach((cell: ElementRef) => {
+    this._toColumnCells.forEach((cell: ElementRef) => {
       const children = [];
       for (const span of cell.nativeElement.children) {
         children.push({
@@ -171,11 +156,7 @@ export class MailsTableComponent implements OnInit, AfterViewInit {
   }
 
   private truncateToColumnData() {
-    if (!this.toColumnCells) {
-      return;
-    }
-
-    this.toColumnCells.forEach((cell: ElementRef) => {
+    this._toColumnCells.forEach((cell: ElementRef) => {
       const cellRef = cell.nativeElement;
       const columnWidth = cellRef.offsetWidth;
 
