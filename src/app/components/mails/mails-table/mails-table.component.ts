@@ -25,6 +25,10 @@ export class MailsTableComponent implements OnInit, AfterViewInit {
     this._collapsedRows = {};
     this.resetSortHeaders();
     this.load();
+    setTimeout(() => {
+      this.saveInitialToColumnData();
+      this.truncateToColumnData();
+    });
   }
 
   get dateRange(): MomentRange {
@@ -99,13 +103,16 @@ export class MailsTableComponent implements OnInit, AfterViewInit {
 
   private resetSortHeaders(keepColumnSorted?: string) {
     this._sortedColumn = keepColumnSorted;
-    if (this._headers) {
-      this._headers.forEach(header => {
-        if (!keepColumnSorted || header.sortable !== keepColumnSorted) {
-          header.direction = '';
-        }
-      });
+
+    if (!this._headers) {
+      return;
     }
+
+    this._headers.forEach(header => {
+      if (!keepColumnSorted || header.sortable !== keepColumnSorted) {
+        header.direction = '';
+      }
+    });
   }
 
   private compare(first, second) {
@@ -144,6 +151,11 @@ export class MailsTableComponent implements OnInit, AfterViewInit {
   // There has to be a better way not to save initial data and just hide spans
   // Right now they get removed from html
   private saveInitialToColumnData() {
+    if (!this.toColumnCells) {
+      return;
+    }
+
+    this._toColumnsInitialData = {};
     this.toColumnCells.forEach((cell: ElementRef) => {
       const children = [];
       for (const span of cell.nativeElement.children) {
@@ -159,6 +171,10 @@ export class MailsTableComponent implements OnInit, AfterViewInit {
   }
 
   private truncateToColumnData() {
+    if (!this.toColumnCells) {
+      return;
+    }
+
     this.toColumnCells.forEach((cell: ElementRef) => {
       const cellRef = cell.nativeElement;
       const columnWidth = cellRef.offsetWidth;
