@@ -52,7 +52,7 @@ table.mail {
       background-color: #fafafa !important;
     }
 
-    td {
+    td:not(.no-overflow) {
       max-width: 0;
       text-overflow: ellipsis;
       white-space: nowrap;

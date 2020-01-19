@@ -1,4 +1,7 @@
-<div class="row h-100">
+<div
+  class="row h-100"
+  (window:resize)="onResize()"
+>
   <div class="col-12">
     <table class="table table-hover mail mt-2">
       <caption>Results: <span [innerHTML]="this.mails.length"></span> mails(s)</caption>
@@ -38,16 +41,23 @@
             (click)="toogleCollapseRow(mail.id)"
           >
             <td [ngClass]="tdClasses('from')">{{ mail.from }}</td>
-            <td [ngClass]="tdClasses('to')">{{ mail.to.join(", ") }}</td>
-            <td>
+            <td
+              [attr.data-id]="mail.id"
+              #to_column_overflow
+              class="overflow_container"
+              [ngClass]="tdClasses('to')"
+            >
+              <span *ngFor="let item of mail.to">{{ item }}</span>
+            </td>
+            <td class="no-overflow">
               <span
-                *ngIf="mail.to.length > 1"
+                *ngIf="hiddenMailsNumberInToColumn[mail.id]"
                 class="badge badge-secondary"
-              >{{ "+" + (mail.to.length - 1) }}
+              >{{ "+" + hiddenMailsNumberInToColumn[mail.id] }}
               </span>
             </td>
             <td [ngClass]="tdClasses('subject')">{{ mail.subject }}</td>
-            <td>
+            <td class="no-overflow">
               <span
                 *ngIf="mail.attachment.length > 0"
                 class="clip"

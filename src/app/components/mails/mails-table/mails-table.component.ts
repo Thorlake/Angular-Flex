@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Input, ElementRef, AfterViewInit } from '@angular/core';
 import { Mail } from '@models/mail';
 import { SortableThDirective, SortEvent } from '@directives/sortable-th.directive';
 import { MailService } from '@api/mail.service';
@@ -9,11 +9,12 @@ import { MomentRange } from '@models/moment-range';
   templateUrl: './mails-table.component.html',
   styleUrls: ['./mails-table.component.scss']
 })
-export class MailsTableComponent implements OnInit {
+export class MailsTableComponent implements OnInit, AfterViewInit {
 
   private _dateRange: MomentRange;
   private _sortedColumn: string;
   private _collapsedRows: { [id: number]: boolean } = {};
+  private _toColumnsInitialData: { [id: number]: { html: string, width: number }[] } = {};
 
   @ViewChildren(SortableThDirective)
   private _headers: QueryList<SortableThDirective>;
@@ -31,10 +32,23 @@ export class MailsTableComponent implements OnInit {
   }
 
   public mails: Mail[];
+  hiddenMailsNumberInToColumn: { [id: number]: number } = {};
+
+  @ViewChildren('to_column_overflow')
+  toColumnCells: QueryList<ElementRef>;
 
   constructor(private mailService: MailService) { }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    this.saveInitialToColumnData();
+    // Angular's flow rule forbids updates the view after it has been composed
+    // Leave thread to update view children
+    setTimeout(() => {
+      this.truncateToColumnData();
+    });
   }
 
   public onSort({ column, direction }: SortEvent) {
@@ -69,6 +83,14 @@ export class MailsTableComponent implements OnInit {
       this._collapsedRows[column] = true;
     }
     return this._collapsedRows[column];
+  }
+
+  public onResize() {
+    if (!this.toColumnCells) {
+      return;
+    }
+
+    this.truncateToColumnData();
   }
 
   private load() {
@@ -117,5 +139,50 @@ export class MailsTableComponent implements OnInit {
     }
 
     return res * revertSort;
+  }
+
+  // There has to be a better way not to save initial data and just hide spans
+  // Right now they get removed from html
+  private saveInitialToColumnData() {
+    this.toColumnCells.forEach((cell: ElementRef) => {
+      const children = [];
+      for (const span of cell.nativeElement.children) {
+        children.push({
+          html: span.outerHTML,
+          width: span.offsetWidth
+        });
+      }
+
+      const id = cell.nativeElement.getAttribute('data-id');
+      this._toColumnsInitialData[id] = children;
+    });
+  }
+
+  private truncateToColumnData() {
+    this.toColumnCells.forEach((cell: ElementRef) => {
+      const cellRef = cell.nativeElement;
+      const columnWidth = cellRef.offsetWidth;
+
+      const id = cellRef.getAttribute('data-id');
+      const children = this._toColumnsInitialData[id];
+      let hiddenCount = children.length;
+
+      const dotscommaWidth = 10;
+      // Affects the second item in array. First one is displayed in any case
+      let takenWidth = dotscommaWidth;
+      const truncatedStrings = [];
+      for (const span of children) {
+        takenWidth += span.width + dotscommaWidth;
+        if (takenWidth > columnWidth && truncatedStrings.length > 0) {
+          truncatedStrings.push('...');
+          break;
+        }
+        hiddenCount--;
+        truncatedStrings.push(span.html);
+      }
+
+      this.hiddenMailsNumberInToColumn[id] = hiddenCount > 0 ? hiddenCount : undefined;
+      cellRef.innerHTML = truncatedStrings.join(', ');
+    });
   }
 }
