@@ -1,12 +1,20 @@
-<div class="container mt-5 h-100">
-  <div class="row">
-    <div class="col-md-auto">
-      <app-search-panel (searchSubmit)="onSearchSubmit($event)"></app-search-panel>
-    </div>
-  </div>
+<div class="container h-100">
   <div class="row h-100">
-    <div class="col-12">
-      <app-mails-table [dateRange]="dateRange"></app-mails-table>
+    <div class="col-12 d-flex flex-column h-100">
+
+      <div class="row mt-5">
+        <div class="col-md-auto">
+          <app-search-panel (searchSubmit)="onSearchSubmit($event)"></app-search-panel>
+        </div>
+      </div>
+
+      <div class="row flex-grow-1">
+        <div class="col-12">
+          <div class="container h-100">
+            <app-mails-table [dateRange]="dateRange"></app-mails-table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
