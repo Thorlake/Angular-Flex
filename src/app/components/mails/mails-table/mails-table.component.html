@@ -1,90 +1,98 @@
-<div
-  class="row h-100"
-  (window:resize)="onResize()"
->
+<div class="row h-100">
   <div class="col-12 d-flex flex-column h-100">
-    <div class="row mt-2">
+    <div class="row mt-4">
       <div class="col-12">
-        <table class="table table-hover mail">
-          <caption>Results: <span [innerHTML]="this.mails.length"></span> mails(s)</caption>
-          <thead
-            class="thead-light"
-            *ngIf="mails && mails.length > 0"
+
+        <div class="mt-table d-flex flex-column">
+          <div class="caption">Results: <span [innerHTML]="this.mails.length"></span> mails(s)</div>
+          <div
+            class="mt-header d-flex"
+            *ngIf="this.mails.length > 0"
           >
-            <tr>
-              <th
-                style="width: 15%"
-                sortable="from"
-                (sort)="onSort($event)"
-              >From</th>
-              <th
-                style="width: 20%"
-                sortable="to"
-                (sort)="onSort($event)"
-              >To</th>
-              <th style="width: 5%"></th>
-              <th
-                style="width: 40%"
-                sortable="subject"
-                (sort)="onSort($event)"
-              >Subject</th>
-              <th style="width: 5%"></th>
-              <th
-                style="width: 15%"
-                sortable="date"
-                (sort)="onSort($event)"
-              >Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <ng-container *ngFor="let mail of this.mails">
-              <tr
-                class="clickable"
-                (click)="toogleCollapseRow(mail.id)"
+            <div
+              class="from"
+              sortable="from"
+              (sort)="onSort($event)"
+            >From</div>
+            <div
+              class="to"
+              sortable="to"
+              (sort)="onSort($event)"
+            >To</div>
+            <div class="mt-icon m-badge"></div>
+            <div
+              class="subject"
+              sortable="subject"
+              (sort)="onSort($event)"
+            >Subject</div>
+            <div class="mt-icon m-attachment"></div>
+            <div
+              class="date"
+              sortable="date"
+              (sort)="onSort($event)"
+            >Date</div>
+          </div>
+          <ng-container *ngFor="let mail of this.mails">
+
+            <div
+              class="mt-row clickable"
+              (click)="toogleCollapseRow(mail.id)"
+            >
+              <div
+                class="from"
+                [ngClass]="rowClasses('from')"
+              >{{mail.from}}</div>
+              <div
+                class="to d-flex flex-row flex-wrap overflow-hidden"
+                [ngClass]="rowClasses('to')"
               >
-                <td [ngClass]="tdClasses('from')">{{ mail.from }}</td>
-                <td
-                  [attr.data-id]="mail.id"
-                  #to_column_overflow
-                  class="overflow_container"
-                  [ngClass]="tdClasses('to')"
+                <div
+                  *ngFor="let item of mail.to; let i = index"
+                  [class.text-truncate]="i == 0"
                 >
-                  <span *ngFor="let item of mail.to">{{ item }}</span>
-                </td>
-                <td class="no-overflow">
-                  <span
-                    *ngIf="hiddenMailsNumberInToColumn[mail.id]"
-                    class="badge badge-secondary"
-                  >{{ "+" + hiddenMailsNumberInToColumn[mail.id] }}
-                  </span>
-                </td>
-                <td [ngClass]="tdClasses('subject')">{{ mail.subject }}</td>
-                <td class="no-overflow">
-                  <span
-                    *ngIf="mail.attachment.length > 0"
-                    class="clip"
-                  ></span>
-                </td>
-                <td [ngClass]="tdClasses('date')">{{ mail.date | dateTimeFormat }}</td>
-              </tr>
-              <tr [ngbCollapse]="isRowCollapsed(mail.id)">
-                <td></td>
-                <td colspan="5">
-                  <div>{{mail.subject}}</div>
-                  <div>
-                    <img
-                      *ngIf="mail.attachment.length > 0"
-                      width="256"
-                      height="256"
-                      alt="no_img"
-                      [src]="mail.attachment"
-                    />
-                  </div>
-                </td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
+                  {{item}}<ng-container *ngIf="mail.to.length > 1 && i != mail.to.length">,&nbsp;</ng-container>
+                </div>
+              </div>
+              <div class="mt-icon m-badge text-center">
+                <span class="badge badge-secondary">{{ "+" + mail.to.length }}
+                </span></div>
+              <div
+                class="subject"
+                [ngClass]="rowClasses('subject')"
+              >{{mail.subject}}</div>
+              <div class="mt-icon m-attachment text-center">
+                <div
+                  *ngIf="mail.attachment.length > 0"
+                  class="clip"
+                ></div>
+              </div>
+              <div
+                class="date"
+                [ngClass]="rowClasses('date')"
+              >{{mail.date | dateTimeFormat}}</div>
+              <div class="mt-icon swipe-right">
+                <div class="swipe-right-icon"></div>
+              </div>
+            </div>
+
+            <div
+              class="mt-row p-2 pl-5"
+              [ngbCollapse]="isRowCollapsed(mail.id)"
+            >
+              <div>{{mail.subject}}</div>
+              <div>
+                <img
+                  *ngIf="mail.attachment.length > 0"
+                  width="256"
+                  height="256"
+                  alt="no_img"
+                  [src]="mail.attachment"
+                />
+              </div>
+            </div>
+
+          </ng-container>
+        </div>
       </div>
     </div>
 
