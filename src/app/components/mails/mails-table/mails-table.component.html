@@ -59,18 +59,15 @@
                 class="subject"
                 [ngClass]="rowClasses('subject')"
               >{{mail.subject}}</div>
-              <div class="mt-icon mt-attachment text-center">
-                <div
-                  *ngIf="mail.attachment.length > 0"
-                  class="clip"
-                ></div>
+              <div class="mt-icon mt-attachment">
+                <img *ngIf="mail.attachment.length > 0" />
               </div>
               <div
                 class="date"
                 [ngClass]="rowClasses('date')"
               >{{mail.date | dateTimeFormat}}</div>
               <div class="mt-icon swipe-right">
-                <div class="swipe-right-icon"></div>
+                <img />
               </div>
             </div>
 

@@ -179,12 +179,12 @@
           margin-left: 10px;
         }
 
-        .clip {
+        > img {
           width: 18px;
           height: 18px;
-          display: inline-block;
-          background-image: url("/assets/images/icon_clip.svg");
-          background-repeat: no-repeat;
+          display: block;
+          margin: 0 auto;
+          content: url("/assets/images/icon_clip.svg");
         }
       }
       .date {
@@ -204,12 +204,12 @@
           margin-left: 10px;
         }
 
-        .swipe-right-icon {
+        > img {
           width: 8px;
           height: 8px;
           display: inline-block;
-          background-image: url("/assets/images/icon_arrow02.svg");
-          background-repeat: no-repeat;
+          margin: 0 auto;
+          content: url("/assets/images/icon_arrow02.svg");
         }
       }
 
