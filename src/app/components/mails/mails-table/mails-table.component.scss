@@ -1,6 +1,20 @@
+$text-color: #666666;
+$border-color: #ebebeb;
+
 @mixin for-phone-only {
   @media all and (max-width: 700px) {
     @content;
+  }
+}
+
+@mixin row-class {
+  order: 1;
+  padding: 10px;
+  height: 40px;
+
+  @include for-phone-only {
+    padding: 0px;
+    height: 24px;
   }
 }
 
@@ -21,16 +35,9 @@
   }
 }
 
-@mixin row-class {
-  order: 1;
-  padding: 10px;
-  height: 40px;
-
-  @include for-phone-only {
-    padding: 0px;
-    height: 24px;
-  }
-}
+/* ==========================================================================
+                            Main styles
+========================================================================== */
 
 .mt-table {
   display: flex;
@@ -56,10 +63,10 @@
   }
 
   .caption {
-    color: #666666;
+    color: $text-color;
     font-weight: 500;
     caption-side: top;
-    border-bottom: 2px solid #ebebeb;
+    border-bottom: 2px solid $border-color;
 
     > span {
       font-weight: bold;
@@ -67,10 +74,14 @@
     }
   }
 
+  /* ==========================================================================
+                            Table header
+  ========================================================================== */
+
   .mt-header {
     display: flex;
-    color: #666666;
-    border-bottom: 2px solid #ebebeb;
+    color: $text-color;
+    border-bottom: 2px solid $border-color;
     font-weight: 500;
     background-color: #f5f5f5;
 
@@ -84,7 +95,8 @@
       &[sortable] {
         cursor: pointer;
 
-        &.asc {
+        &.asc,
+        &.desc {
           font-weight: bold;
 
           &:after {
@@ -92,13 +104,8 @@
           }
         }
 
-        &.desc {
-          font-weight: bold;
-
-          &:after {
-            @include sort-direction-icon();
-            transform: rotate(180deg);
-          }
+        &.desc:after {
+          transform: rotate(180deg);
         }
       }
 
@@ -106,17 +113,23 @@
         width: auto;
         height: 24px;
 
-        &:not(:last-child):not(.mt-icon) {
-          padding-right: 10px;
-          border-right: solid 1px #808080;
-        }
+        &:not(.mt-icon) {
+          &:not(:last-child) {
+            padding-right: 10px;
+            border-right: solid 1px #808080;
+          }
 
-        &:not(:first-child):not(.mt-icon) {
-          padding-left: 10px;
+          &:not(:first-child) {
+            padding-left: 10px;
+          }
         }
       }
     }
   }
+
+  /* ==========================================================================
+                            Table body
+  ========================================================================== */
 
   .mt-row {
     border-bottom: 1px solid #c7c5c5;
