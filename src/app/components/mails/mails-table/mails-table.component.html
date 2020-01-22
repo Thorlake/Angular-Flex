@@ -3,10 +3,10 @@
     <div class="row mt-4">
       <div class="col-12">
 
-        <div class="mt-table d-flex flex-column">
+        <div class="mt-table">
           <div class="caption">Results: <span [innerHTML]="this.mails.length"></span> mails(s)</div>
           <div
-            class="mt-header d-flex"
+            class="mt-header"
             *ngIf="this.mails.length > 0"
           >
             <div
@@ -19,13 +19,13 @@
               sortable="to"
               (sort)="onSort($event)"
             >To</div>
-            <div class="mt-icon m-badge"></div>
+            <div class="mt-icon mt-badge"></div>
             <div
               class="subject"
               sortable="subject"
               (sort)="onSort($event)"
             >Subject</div>
-            <div class="mt-icon m-attachment"></div>
+            <div class="mt-icon mt-attachment"></div>
             <div
               class="date"
               sortable="date"
@@ -33,7 +33,6 @@
             >Date</div>
           </div>
           <ng-container *ngFor="let mail of this.mails">
-
             <div
               class="mt-row clickable"
               (click)="toogleCollapseRow(mail.id)"
@@ -53,14 +52,14 @@
                   {{item}}<ng-container *ngIf="mail.to.length > 1 && i != mail.to.length">,&nbsp;</ng-container>
                 </div>
               </div>
-              <div class="mt-icon m-badge text-center">
+              <div class="mt-icon mt-badge text-center">
                 <span class="badge badge-secondary">{{ "+" + mail.to.length }}
                 </span></div>
               <div
                 class="subject"
                 [ngClass]="rowClasses('subject')"
               >{{mail.subject}}</div>
-              <div class="mt-icon m-attachment text-center">
+              <div class="mt-icon mt-attachment text-center">
                 <div
                   *ngIf="mail.attachment.length > 0"
                   class="clip"
