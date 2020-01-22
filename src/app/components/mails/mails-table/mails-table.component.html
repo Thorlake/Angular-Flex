@@ -53,7 +53,7 @@
                   *ngFor="let item of mail.to; let i = index"
                   [class.text-truncate]="i == 0"
                 >
-                  {{item}}<ng-container *ngIf="mail.to.length > 1 && i != mail.to.length">,&nbsp;</ng-container>
+                  {{item}}<ng-container *ngIf="mail.to.length > 1 && i != mail.to.length - 1">,&nbsp;</ng-container>
                 </div>
               </div>
               <div class="mt-icon mt-badge text-center">
