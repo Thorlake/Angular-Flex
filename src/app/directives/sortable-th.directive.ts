@@ -9,6 +9,7 @@ export interface SortEvent {
 }
 
 @Directive({
+  // tslint:disable-next-line: directive-selector
   selector: 'div[sortable]',
   host: {
     '[class.asc]': 'direction === "asc"',

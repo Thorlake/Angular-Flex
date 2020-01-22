@@ -45,6 +45,7 @@
                 [ngClass]="rowClasses('from')"
               >{{mail.from}}</div>
               <div
+                [badge]="badge"
                 class="to"
                 [ngClass]="rowClasses('to')"
               >
@@ -56,8 +57,11 @@
                 </div>
               </div>
               <div class="mt-icon mt-badge text-center">
-                <span class="badge badge-secondary">{{ "+" + mail.to.length }}
-                </span></div>
+                <span
+                  #badge
+                  class="badge badge-secondary"
+                ></span>
+              </div>
               <div
                 class="subject"
                 [ngClass]="rowClasses('subject')"

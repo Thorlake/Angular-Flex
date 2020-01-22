@@ -13,6 +13,7 @@ import { SearchPanelComponent } from './components/search-panel/search-panel.com
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { MailsTableComponent } from './components/mails/mails-table/mails-table.component';
 import { SortableThDirective } from '@directives/sortable-th.directive';
+import { UpdateBadgeDirective } from '@directives/update-badge.directive';
 import { DateTimeFormatPipe } from './pipes/date-time-format.pipe';
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DateTimeFormatPipe } from './pipes/date-time-format.pipe';
     SearchPanelComponent,
     MailsTableComponent,
     DateTimeFormatPipe,
-    SortableThDirective
+    SortableThDirective,
+    UpdateBadgeDirective
   ],
   imports: [
     BrowserModule,

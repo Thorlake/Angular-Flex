@@ -170,7 +170,6 @@ $row-height-for-phone: 24px;
 
         @include for-phone-only {
           display: inline-block;
-
           > img {
             width: $mail_icon_width;
             height: $row-height-for-phone * 2;
@@ -257,6 +256,18 @@ $row-height-for-phone: 24px;
 
       .badge-secondary {
         background-color: #888888;
+      }
+
+      .mt-icon {
+        min-width: 45px;
+
+        @include for-phone-only {
+          min-width: auto;
+        }
+      }
+
+      .three-dots:after {
+        content: "...";
       }
     }
   }
