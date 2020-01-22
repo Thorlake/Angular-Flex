@@ -50,6 +50,8 @@ export class MailsTableComponent implements OnInit, OnChanges {
     });
   }
 
+  // https://developer.mozilla.org/en-US/docs/Web/CSS/Column_combinator
+  // replace with column combinator (||) when it's released
   public rowClasses(column: string) {
     const classes = {
       'font-weight-bold': this._sortedColumn === column,
