@@ -1,5 +1,6 @@
 $text-color: #666666;
 $border-color: #ebebeb;
+$row-height-for-phone: 24px;
 
 @mixin for-phone-only {
   @media all and (max-width: 700px) {
@@ -14,7 +15,7 @@ $border-color: #ebebeb;
 
   @include for-phone-only {
     padding: 0px;
-    height: 24px;
+    height: $row-height-for-phone;
   }
 }
 
@@ -111,7 +112,7 @@ $border-color: #ebebeb;
 
       @include for-phone-only {
         width: auto;
-        height: 24px;
+        height: $row-height-for-phone;
 
         &:not(.mt-icon) {
           &:not(:last-child) {
@@ -160,11 +161,29 @@ $border-color: #ebebeb;
         }
       }
 
+      $mail_icon_width: 15px;
+
+      .mt-email {
+        order: 0;
+        display: none;
+        position: absolute;
+
+        @include for-phone-only {
+          display: inline-block;
+
+          > img {
+            width: $mail_icon_width;
+            height: $row-height-for-phone * 2;
+          }
+        }
+      }
+
       .from {
         @include for-phone-only {
           order: 0;
           width: 51%;
           flex-grow: 1;
+          margin-left: $mail_icon_width + 5;
         }
       }
 
@@ -175,6 +194,7 @@ $border-color: #ebebeb;
         @include for-phone-only {
           width: 51%;
           flex-grow: 1;
+          margin-left: $mail_icon_width + 5;
         }
       }
 
@@ -204,7 +224,6 @@ $border-color: #ebebeb;
           height: 18px;
           display: block;
           margin: 0 auto;
-          content: url("/assets/images/icon_clip.svg");
 
           @include for-phone-only {
             display: inline-block;
@@ -232,7 +251,6 @@ $border-color: #ebebeb;
             width: 8px;
             height: 8px;
             display: inline-block;
-            content: url("/assets/images/icon_arrow02.svg");
           }
         }
       }

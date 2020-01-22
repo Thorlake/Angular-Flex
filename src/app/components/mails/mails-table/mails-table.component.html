@@ -37,6 +37,9 @@
               class="mt-row clickable"
               (click)="toogleCollapseRow(mail.id)"
             >
+              <div class="mt-icon mt-email">
+                <img src="/assets/images/icon_mail_sp.svg" />
+              </div>
               <div
                 class="from"
                 [ngClass]="rowClasses('from')"
@@ -60,14 +63,17 @@
                 [ngClass]="rowClasses('subject')"
               >{{mail.subject}}</div>
               <div class="mt-icon mt-attachment">
-                <img *ngIf="mail.attachment.length > 0" />
+                <img
+                  src="/assets/images/icon_clip.svg"
+                  *ngIf="mail.attachment.length > 0"
+                />
               </div>
               <div
                 class="date"
                 [ngClass]="rowClasses('date')"
               >{{mail.date | dateTimeFormat}}</div>
               <div class="mt-icon swipe-right">
-                <img />
+                <img src="/assets/images/icon_arrow02.svg" />
               </div>
             </div>
 
