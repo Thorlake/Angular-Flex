@@ -36,7 +36,7 @@ export class MailService {
       {
         id: 3,
         from: 'ccc@example.com',
-        to: ['a@com', 'b@com', 'c@com', 'd@com', 'e@com'],
+        to: ['xxx@example.com', 'ddd@example.com'],
         subject: 'Happy New Year! Greetings for the New Year.',
         date: new Date().withoutTime().addSeconds(1),
         attachment: '/assets/images/attachment1.jpg'
