@@ -1,0 +1,43 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@extensions/*": [
+        "src/app/extensions/*.extensions.ts"
+      ],
+      "@api/*": [
+        "src/app/services/api/*.service.ts",
+        "src/app/services/api/*.ts", // for autoimport in IDE
+      ],
+      "@services/*": [
+        "src/app/services/*.service.ts",
+        "src/app/services/*.ts", // for autoimport in IDE
+      ],
+      "@models/*": [
+        "src/app/models/*.ts",
+        "src/app/models/entities/*.ts",
+        "src/app/models/responses/*.ts",
+      ],
+      "@directives/*": [
+        "src/app/directives/*.directive.ts",
+        "src/app/directives/*.ts" // for autoimport in IDE
+      ]
+    }
+  }
+}

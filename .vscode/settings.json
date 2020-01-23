@@ -1,0 +1,38 @@
+{
+  "editor.formatOnSave": true,
+  "html.format.wrapLineLength": 0,
+  "html.format.wrapAttributes": "force-expand-multiline",
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "log.error",
+        "settings": {
+          "foreground": "#ff0000",
+          "fontStyle": "bold"
+        }
+      },
+      {
+        "scope": "log.warning",
+        "settings": {
+          "foreground": "#ff8000",
+          "fontStyle": "bold"
+        }
+      },
+      {
+        "scope": "log.info",
+        "settings": {
+          "foreground": "#0080ff",
+          "fontStyle": "bold"
+        }
+      },
+      {
+        "scope": "log.debug",
+        "settings": {
+          "foreground": "#ff80ff",
+          "fontStyle": ""
+        }
+      }
+    ]
+  },
+  "qub-xml-vscode.formatOptions.alignAttributes": true
+}
