@@ -1,8 +1,12 @@
-# Hennge
+# Angular-Flex
 
 Angular 7 (check package.json to find out more)\
 npm version 6.11.3\
 Node v10.17.0
+
+## Flex
+
+Support desktop and mobile versions
 
 ## Development server
 
