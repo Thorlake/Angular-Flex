@@ -1,5 +1,7 @@
 # Angular-Flex
 
+Simple project to show work skills with flexible layout and Angular 2+
+
 Angular 7 (check package.json to find out more)\
 npm version 6.11.3\
 Node v10.17.0
