@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList, Input, ElementRef, AfterViewInit, SimpleChange, OnChanges, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Input, SimpleChange, OnChanges } from '@angular/core';
 import { Mail } from '@models/mail';
 import { SortableThDirective, SortEvent } from '@directives/sortable-th.directive';
 import { MailService } from '@api/mail.service';
