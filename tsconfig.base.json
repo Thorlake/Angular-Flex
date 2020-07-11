@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
     "downlevelIteration": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -10,7 +10,7 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2018",
+    "target": "ESNext",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -20,24 +20,24 @@
     ],
     "paths": {
       "@extensions/*": [
-        "src/app/extensions/*.extensions.ts"
+        "app/extensions/*.extensions.ts"
       ],
       "@api/*": [
-        "src/app/services/api/*.service.ts",
-        "src/app/services/api/*.ts", // for autoimport in IDE
+        "app/services/api/*.service.ts",
+        "app/services/api/*.ts", // for autoimport in IDE
       ],
       "@services/*": [
-        "src/app/services/*.service.ts",
-        "src/app/services/*.ts", // for autoimport in IDE
+        "app/services/*.service.ts",
+        "app/services/*.ts", // for autoimport in IDE
       ],
       "@models/*": [
-        "src/app/models/*.ts",
-        "src/app/models/entities/*.ts",
-        "src/app/models/responses/*.ts",
+        "app/models/*.ts",
+        "app/models/entities/*.ts",
+        "app/models/responses/*.ts",
       ],
       "@directives/*": [
-        "src/app/directives/*.directive.ts",
-        "src/app/directives/*.ts" // for autoimport in IDE
+        "app/directives/*.directive.ts",
+        "app/directives/*.ts" // for autoimport in IDE
       ]
     }
   }
