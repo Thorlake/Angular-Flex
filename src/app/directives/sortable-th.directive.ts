@@ -1,5 +1,5 @@
 
-import { Directive, EventEmitter, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, Input, Output, HostBinding, HostListener } from '@angular/core';
 
 export type SortDirection = 'asc' | 'desc' | '';
 
@@ -10,16 +10,16 @@ export interface SortEvent {
 
 @Directive({
   // tslint:disable-next-line: directive-selector
-  selector: 'div[sortable]',
-  host: {
-    '[class.asc]': 'direction === "asc"',
-    '[class.desc]': 'direction === "desc"',
-    '(click)': 'rotate()'
-  }
+  selector: 'div[sortable]'
 })
 export class SortableThDirective {
+  private readonly _mapClassByDirection: { [key: string]: string } = {
+    'asc': 'asc',
+    'desc': 'desc',
+    '': ''
+  };
 
-  private directionTransition: { [key: string]: SortDirection } = {
+  private readonly _directionTransition: { [key: string]: SortDirection } = {
     'asc': 'desc',
     'desc': '',
     '': 'asc'
@@ -29,8 +29,14 @@ export class SortableThDirective {
   @Input() direction: SortDirection = '';
   @Output() sort = new EventEmitter<SortEvent>();
 
+  @HostBinding('class')
+  public get getClasses(): string {
+    return this._mapClassByDirection[this.direction];
+  }
+
+  @HostListener('click')
   rotate() {
-    this.direction = this.directionTransition[this.direction];
+    this.direction = this._directionTransition[this.direction];
     this.sort.emit({ column: this.sortable, direction: this.direction });
   }
 }
