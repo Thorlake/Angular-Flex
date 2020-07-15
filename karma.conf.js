@@ -4,27 +4,17 @@
 module.exports = function (config) {
   config.set({
 
-    // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: 'src',
-
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', "karma-typescript"],
+    frameworks: ['jasmine', "karma-typescript", '@angular-devkit/build-angular'],
 
-    // list of files / patterns to load in the browser
-    files: [
-      "**/*.ts"
+    plugins: [
+      require('karma-jasmine'),
+      require('karma-chrome-launcher'),
+      require('karma-jasmine-html-reporter'),
+      require('@angular-devkit/build-angular/plugins/karma'),
+      require('karma-typescript')
     ],
-
-    // list of files / patterns to exclude
-    exclude: [
-    ],
-
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      "**/*.ts": "karma-typescript"
-    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -50,6 +40,17 @@ module.exports = function (config) {
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
+
+    // leave jusmine output visible in browser (information about tests succeeded/failed)
+    client: {
+      clearContext: false
+    },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits

@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "./",
     "downlevelIteration": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -20,24 +20,24 @@
     ],
     "paths": {
       "@extensions/*": [
-        "app/extensions/*.extensions.ts"
+        "src/app/extensions/*.extensions.ts"
       ],
       "@api/*": [
-        "app/services/api/*.service.ts",
-        "app/services/api/*.ts", // for autoimport in IDE
+        "src/app/services/api/*.service.ts",
+        "src/app/services/api/*.ts", // for autoimport in IDE
       ],
       "@services/*": [
-        "app/services/*.service.ts",
-        "app/services/*.ts", // for autoimport in IDE
+        "src/app/services/*.service.ts",
+        "src/app/services/*.ts", // for autoimport in IDE
       ],
       "@models/*": [
-        "app/models/*.ts",
-        "app/models/entities/*.ts",
-        "app/models/responses/*.ts",
+        "src/app/models/*.ts",
+        "src/app/models/entities/*.ts",
+        "src/app/models/responses/*.ts",
       ],
       "@directives/*": [
-        "app/directives/*.directive.ts",
-        "app/directives/*.ts" // for autoimport in IDE
+        "src/app/directives/*.directive.ts",
+        "src/app/directives/*.ts" // for autoimport in IDE
       ]
     }
   }
