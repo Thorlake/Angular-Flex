@@ -8,10 +8,11 @@ Node v12.18.2
 
 ## Flex
 
-Support desktop and mobile versions
+Support desktop and mobile layout
 
 ## Development server
 
 * Run `npm install` to download `node_modules`
-* Run `npm run start` to run dev server.
-* Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* Run `npm run start` to run dev server
+* Navigate to `http://localhost:4200/`
+* Run `npm run test` to run tests
